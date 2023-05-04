@@ -46,6 +46,7 @@ public class KafkaConsumerConfiguration {
 
   @Bean
   @Primary
+  @Qualifier("batchKafkaListenerContainerFactory")
   public ConcurrentKafkaListenerContainerFactory<String, String> batchKafkaListenerContainerFactory
       (
           MessageConverter messageConverter

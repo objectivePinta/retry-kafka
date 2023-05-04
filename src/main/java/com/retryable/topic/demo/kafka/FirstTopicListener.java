@@ -31,7 +31,7 @@ public class FirstTopicListener {
 
 
   @KafkaListener(
-      containerFactory = "kafkaListenerContainerFactory",
+      containerFactory = "batchKafkaListenerContainerFactory",
       clientIdPrefix = "demo",
       topics = "first-topic",
       concurrency = "1",
