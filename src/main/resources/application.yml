@@ -1,0 +1,50 @@
+
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKERS_URL:127.0.0.1:9092}
+    producer:
+      compression-type: ${KAFKA_PRODUCER_COMPRESSION_TYPE:lz4}
+      client-id: ${KAFKA_PRODUCER_CLIENT_ID:retry-demo-producer}
+      retries: ${KAFKA_PRODUCER_RETRIES:5}
+      batch-size: ${KAFKA_PRODUCER_BATCH_SIZE:65536}
+      retry-backoff: ${KAFKA_PRODUCER_RETRY_BACKOFF:500}
+      linger: ${KAFKA_PRODUCER_LINGER:1000}
+      request-timeout: ${KAFKA_PRODUCER_REQUEST_TIMEOUT:600000}
+      properties:
+        enable.idempotence: ${KAFKA_PRODUCER_IDEMPOTENCE_ENABLE:false}
+    ssl:
+      enabled: ${KAFKA_SSL_ENABLED:false}
+      security-protocol: ${KAFKA_SECURITY_PROTOCOL:SSL}
+      keystore-type: ${KAFKA_KEYSTORE_TYPE:JKS}
+      truststore-type: ${KAFKA_TRUSTSTORE_TYPE:JKS}
+      key-password: ${KAFKA_SSL_KEYSTORE_PASSWORD}
+      trust-store-password: ${KAFKA_SSL_TRUSTORE_PASSWORD}
+      trust-store-location-path: ${KAFKA_SSL_TRUSTORE_LOCATION}
+      key-store-password: ${KAFKA_SSL_KEYSTORE_PASSWORD}
+      key-store-location-path: ${KAFKA_SSL_KEYSTORE_LOCATION}
+      protocol: ${KAKFA_SSL_PROTOCOL:TLSv1.2}
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP_ID:retry-demo}
+      log-payload: ${KAFKA_CONSUMER_LOG_PAYLOAD:false}
+      max-retries: ${KAFKA_CONSUMER_MAX_RETRIES:3}
+      retry-backoff-multiplier: ${KAFKA_CONSUMER_RETRY_BACKOFF_MULTIPLIER:3}
+      retry-backoff-max-interval: ${KAFKA_CONSUMER_RETRY_BACKOFF_MAX_INTERVAL:60000}
+      connection-max-idle: ${KAFKA_CONSUMER_CONNECTION_MAX_IDLE:500000}
+      max-poll-interval: ${KAFKA_CONSUMER_MAX_POLL_INTERVAL:500000}
+      request-timeout: ${KAFKA_CONSUMER_REQUEST_TIMEOUT:500000}
+      default-api-timeout: ${KAFKA_CONSUMER_DEFAULT_API_TIMEOUT:60000}
+      metadata-max-age: ${KAFKA_CONSUMER_METADATA_MAX_AGE:300000}
+      session-timeout: ${KAFKA_CONSUMER_SESSION_TIMEOUT:400000}
+      auto-commit-interval: 100
+      enable-auto-commit: ${KAFKA_CONSUMER_ENABLE_AUTO_COMMIT:true}
+      auto-offset-reset: ${KAFKA_CONSUMER_AUTO_OFFSET_RESET:earliest}
+
+task-executor:
+  future-task-executor:
+    prefix: ${TASK_EXECUTOR_FUTURE_TASK_PREFIX:future-task-}
+    size: ${TASK_EXECUTOR_FUTURE_TASK_SIZE:5}
+    max-size: ${TASK_EXECUTOR_FUTURE_TASK_MAX_SIZE:20}
+  scheduler-task-executor:
+    prefix: ${TASK_EXECUTOR_SCHEDULER_TASK_PREFIX:scheduler-task-}
+    size: ${TASK_EXECUTOR_SCHEDULER_TASK_SIZE:5}
